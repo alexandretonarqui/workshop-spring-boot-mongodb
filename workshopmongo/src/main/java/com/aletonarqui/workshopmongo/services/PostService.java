@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aletonarqui.workshopmongo.domain.Post;
-import com.aletonarqui.workshopmongo.domain.User;
-import com.aletonarqui.workshopmongo.dto.UserDTO;
 import com.aletonarqui.workshopmongo.repository.PostRepository;
-import com.aletonarqui.workshopmongo.repository.UserRepository;
 import com.aletonarqui.workshopmongo.services.exception.ObjectNotFoundException;
 
 @Service
@@ -25,4 +22,7 @@ public class PostService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
 	}
 	
+	public List<Post> findByTitle(String text) {
+		return repo.findByTitleContainingIgnoreCase(text);
+	}
 }
